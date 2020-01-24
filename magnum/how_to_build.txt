@@ -1,0 +1,1 @@
+"C:\Program Files\CMake\bin\cmake" -DCMAKE_INSTALL_PREFIX="K:\projects\boxx\magnum\magnum-2019.10\output" ..
