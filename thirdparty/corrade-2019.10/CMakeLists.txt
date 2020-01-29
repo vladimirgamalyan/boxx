@@ -27,7 +27,10 @@
 # oldest supported version is 3.5.2 (Ubuntu 16.04), but we don't need any
 # features from that, 3.4 is required in order to have RUNTIME_OUTPUT_DIRECTORY
 # etc. properties accept generator expressions.
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.15)	# 3.4
+
+cmake_policy(SET CMP0091 NEW)
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 # As reported in https://github.com/mosra/corrade/issues/52 and then tracked
 # down to https://gitlab.kitware.com/cmake/cmake/issues/18099, CMake < 3.12 has

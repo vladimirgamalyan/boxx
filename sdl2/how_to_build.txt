@@ -1,2 +1,0 @@
-Open VisualC/SDL.sln in VS2019.
-Change toolset to all projects and all configurations to Visual Studio 2017 - Windows XP (v141_xp).

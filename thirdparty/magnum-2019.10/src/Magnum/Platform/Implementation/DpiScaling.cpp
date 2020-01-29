@@ -167,8 +167,10 @@ bool isWindowsAppDpiAware() {
     HMODULE const user32 = GetModuleHandleA("User32.dll");
     CORRADE_INTERNAL_ASSERT(user32);
     auto const isProcessDPIAware = reinterpret_cast<BOOL(WINAPI *)()>(GetProcAddress(user32, "IsProcessDPIAware"));
-    CORRADE_INTERNAL_ASSERT(isProcessDPIAware);
-    return isProcessDPIAware();
+    //CORRADE_INTERNAL_ASSERT(isProcessDPIAware);
+    if (isProcessDPIAware)
+        return isProcessDPIAware();
+    return false;
 }
 #endif
 

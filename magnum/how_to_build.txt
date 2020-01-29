@@ -1,6 +1,0 @@
-First build corrade then magnum.
-
-mkdir build && cd build
-"C:\Program Files\CMake\bin\cmake" -DCMAKE_INSTALL_PREFIX="K:\projects\boxx\magnum\output" ..
-"C:\Program Files\CMake\bin\cmake" --build .
-"C:\Program Files\CMake\bin\cmake" --build . --target install

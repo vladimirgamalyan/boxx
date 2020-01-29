@@ -75,16 +75,22 @@ else()
             message(FATAL_ERROR "Unsupported compiler")
         endif()
     endif()
+	
+    if (WIN32)
+        if (SDL_STATIC)
+			set(STATIC_LIB_SUFFIX "-static")
+		endif()
+    endif()
 
     find_library(SDL2_LIBRARY_RELEASE
         # Compiling SDL2 from scratch on macOS creates dead libSDL2.so symlink
         # which CMake somehow prefers before the SDL2-2.0.dylib file. Making
         # the dylib first so it is preferred. Not sure how this maps to debug
         # config though :/
-        NAMES SDL2-2.0 SDL2
+        NAMES SDL2-2.0 SDL2${STATIC_LIB_SUFFIX}
         PATH_SUFFIXES ${_SDL2_LIBRARY_PATH_SUFFIX})
     find_library(SDL2_LIBRARY_DEBUG
-        NAMES SDL2d
+        NAMES SDL2${STATIC_LIB_SUFFIX}d
         PATH_SUFFIXES ${_SDL2_LIBRARY_PATH_SUFFIX})
     # FPHSA needs one of the _DEBUG/_RELEASE variables to check that the
     # library was found -- using SDL_LIBRARY, which will get populated by
