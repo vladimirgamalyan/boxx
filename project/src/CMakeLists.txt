@@ -1,4 +1,4 @@
-find_package(Magnum REQUIRED GL Sdl2Application)
+find_package(Magnum REQUIRED GL Shaders Sdl2Application)
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
@@ -8,6 +8,7 @@ target_link_libraries(boxx PRIVATE
     Magnum::Application
     Magnum::GL
     Magnum::Magnum
+	Magnum::Shaders
 	winmm.lib
 	version.lib
 	imm32.lib
