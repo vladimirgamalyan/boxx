@@ -12,8 +12,8 @@
 #include <Magnum/Platform/Sdl2Application.h>
 #endif
 
-#include <jni.h>
-#include <android/native_activity.h>
+//#include <jni.h>
+//#include <android/native_activity.h>
 
 /*
 #ifdef CORRADE_TARGET_ANDROID
@@ -33,18 +33,18 @@ static void runQrScanner()
 }
 */
 
-static JavaVM* g_JavaVM = 0;
-
-JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
-{
-	g_JavaVM = vm;
-    return JNI_VERSION_1_4;
-}
+//static JavaVM* g_JavaVM = 0;
+//
+//JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
+//{
+//	g_JavaVM = vm;
+//    return JNI_VERSION_1_4;
+//}
 
 namespace Magnum {
     namespace Examples {
 
-        class TriangleExample : public Platform::AndroidApplication {
+        class TriangleExample : public Platform::Application {
         public:
             explicit TriangleExample(const Arguments& arguments);
 
@@ -109,15 +109,15 @@ namespace Magnum {
         }
 		
 		void TriangleExample::popupQrScanner() {
-			// JNIEnv *env;
-			// g_JavaVM->GetEnv((void**)&env, JNI_VERSION_1_4);
-			
-			JNIEnv *env = nativeActivity()->env;
+			//// JNIEnv *env;
+			//// g_JavaVM->GetEnv((void**)&env, JNI_VERSION_1_4);
+			//
+			//JNIEnv *env = nativeActivity()->env;
 
-			jclass clazz = env->FindClass("com/boxx/game/BoxxActivity");
-			jmethodID mid = env->GetStaticMethodID(clazz, "runQrScanner", "()V");
+			//jclass clazz = env->FindClass("com/boxx/game/BoxxActivity");
+			//jmethodID mid = env->GetStaticMethodID(clazz, "runQrScanner", "()V");
 
-			env->CallStaticVoidMethod(clazz, mid);
+			//env->CallStaticVoidMethod(clazz, mid);
 		}
 		
 		void TriangleExample::mousePressEvent(MouseEvent& /*event*/) {

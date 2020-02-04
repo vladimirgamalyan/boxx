@@ -13,31 +13,40 @@ set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
 set(SOURCE_LIST
         app.cpp
-        )
+    )
 
 if(NOT CORRADE_TARGET_ANDROID)
-    add_executable(boxx ${SOURCE_LIST})
+    if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+        add_executable(boxx WIN32 ${SOURCE_LIST})
+    else()
+        add_executable(boxx ${SOURCE_LIST})
+    endif()
 else()
     add_library(boxx SHARED ${SOURCE_LIST})
 endif()
 
-target_link_libraries(boxx PRIVATE
-	Corrade::Main
+set(LIB_LIST
     Magnum::Application
     Magnum::GL
     Magnum::Magnum
-	Magnum::Shaders)
+	Magnum::Shaders
+    )
 
-#target_link_libraries(boxx PRIVATE
-#    Magnum::Application
-#    Magnum::GL
-#    Magnum::Magnum
-#	Magnum::Shaders
-#	winmm.lib
-#	version.lib
-#	imm32.lib
-#	iphlpapi.lib
-#	setupapi.lib)
+if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+    list(APPEND LIB_LIST Corrade::Main)
+endif()
+
+if(CORRADE_TARGET_WINDOWS)
+    list(APPEND LIB_LIST
+        winmm.lib
+	    version.lib
+	    imm32.lib
+	    iphlpapi.lib
+	    setupapi.lib       
+    )
+endif()
+ 
+target_link_libraries(boxx PRIVATE ${LIB_LIST})
 
 # Gradle-free Android build
 if(CORRADE_TARGET_ANDROID AND CMAKE_ANDROID_NDK)
