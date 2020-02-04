@@ -64,7 +64,13 @@ namespace Magnum {
         };
 
         TriangleExample::TriangleExample(const Arguments& arguments) :
-            Platform::Application{ arguments, Configuration{}.setTitle("Magnum Triangle Example") }
+            Platform::Application{ arguments, Configuration{}
+				.setTitle("Magnum Triangle Example")
+				.setSize({640, 480})
+#ifndef _DEBUG
+				.setWindowFlags(Configuration::WindowFlag::Fullscreen)
+#endif
+			}
         {
             using namespace Math::Literals;
 
