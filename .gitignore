@@ -30,3 +30,5 @@
 
 *.vcxproj.user
 /thirdparty/SDL2-2.0.10/build
+/project/.cxx
+/project/.gradle
