@@ -18,12 +18,26 @@ add_definitions( -DCURL_STATICLIB )
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
+corrade_add_resource(Shaders_RESOURCES resources.conf)
+
 include_directories(${CURL_INCLUDE_DIRS})
+
+file(COPY test.png DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
  
 set(SOURCE_LIST
         app.cpp
         app.h
-        sokol_fetch.h
+        graphics/Graphics.h
+        graphics/Texture.h
+        graphics/RectF.h
+        graphics/SimpleShader.cpp
+        graphics/SimpleShader.h
+        GameEnvironment.h
+        Game.h
+        Game.cpp
+        external/lodepng.h
+        external/lodepng.cpp
+        ${Shaders_RESOURCES}
     )
 
 if(CORRADE_TARGET_ANDROID)
