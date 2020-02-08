@@ -3,7 +3,7 @@ set emscripten=C:/emsdk/upstream/emscripten
 set emscripten_sys=%emscripten%/system
 set corrade_rc=%~dp0/corrade-rc.exe
 set PATH=%PATH%;%~dp0/ninja
-set install_prefix=%~dp0/output
+set install_prefix=%~dp0/web
 set build_dir=build_emscripten
 
 cd /D %~dp0
@@ -22,7 +22,7 @@ cd %build_dir%
     -DCORRADE_RC_EXECUTABLE=%corrade_rc%
 
 %cmake% --build .
-:: %cmake% --build . --target install
+%cmake% --build . --target install
 
 
 cd /D %~dp0

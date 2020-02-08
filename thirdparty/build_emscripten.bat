@@ -41,7 +41,8 @@ cd build_emscripten
     -DCORRADE_RC_EXECUTABLE=%corrade_rc% ^
     -DCMAKE_PREFIX_PATH=%emscripten_sys% ^
     -DMAGNUM_DEPLOY_PREFIX=%~dp0/tmp ^
-    -DWITH_SDL2APPLICATION=ON
+    -DWITH_SDL2APPLICATION=ON ^
+	-DWITH_EMSCRIPTENAPPLICATION=ON
 
 %cmake% --build .
 %cmake% --build . --target install
