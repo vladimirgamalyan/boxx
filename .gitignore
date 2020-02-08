@@ -33,3 +33,4 @@
 /project/.cxx
 /project/.gradle
 /project/.vs
+/thirdparty/curl-7.68.0/builds
