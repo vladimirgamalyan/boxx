@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEnvironment.h"
+#include "spineTest/SpineTest.h"
 
 class Game
 {
@@ -12,4 +13,5 @@ private:
 	GameEnvironment* _env;
 	void* texture0;
 	float angle;
+	SpineTest spineTest;
 };

@@ -17,36 +17,52 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_definitions( -DCURL_STATICLIB )
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
-
-corrade_add_resource(Shaders_RESOURCES resources.conf)
+ 
+corrade_add_resource(Shaders_RESOURCES shaders/resources.conf)
 
 include_directories(${CURL_INCLUDE_DIRS})
 
-file(COPY test.png DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ../assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
  
-set(SOURCE_LIST
+set(SOURCES
         app.cpp
+        shaders/BasicShader.cpp
+        shaders/BasicShaderOneColor.cpp
+        Game.cpp
+        external/lodepng.cpp
+        spineIntegration.cpp
+        spineTest/SpineTest.cpp
+        ${Shaders_RESOURCES}
+    )
+	
+set(INCLUDES
         app.h
         graphics/Graphics.h
         graphics/Texture.h
         graphics/RectF.h
-        graphics/SimpleShader.cpp
-        graphics/SimpleShader.h
+        shaders/BasicShader.h
+        shaders/BasicShaderOneColor.h
         GameEnvironment.h
         Game.h
-        Game.cpp
         external/lodepng.h
-        external/lodepng.cpp
-        ${Shaders_RESOURCES}
-    )
+        spineIntegration.h
+        spineTest/SpineTest.h
+	)
+     
+# add_subdirectory(external/spine-cpp)
+file(GLOB SPINE_INCLUDES "external/spine-cpp/include/**/*.h")
+file(GLOB SPINE_SOURCES "external/spine-cpp/src/**/*.cpp")
+include_directories("external/spine-cpp/include")
+list(APPEND SOURCES ${SPINE_SOURCES})
+list(APPEND INCLUDES ${SPINE_INCLUDES})
 
 if(CORRADE_TARGET_ANDROID)
-    add_library(boxx SHARED ${SOURCE_LIST})
+    add_library(boxx SHARED ${SOURCES})
 else()
     if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-        add_executable(boxx WIN32 ${SOURCE_LIST})
+        add_executable(boxx WIN32 ${SOURCES})
     else()
-        add_executable(boxx ${SOURCE_LIST})
+        add_executable(boxx ${SOURCES})
     endif()
 endif()
 

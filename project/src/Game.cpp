@@ -10,18 +10,22 @@ void Game::init(GameEnvironment* env)
 	std::vector<unsigned char> pngImage;
 	unsigned w = 0;
 	unsigned h = 0;
-	unsigned error = lodepng::decode(pngImage, w, h, "test.png");
+	unsigned error = lodepng::decode(pngImage, w, h, "assets/test.png");
 
 	if (error)
 		std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
 
 	texture0 = env->graphics->makeTexture(w, h, pngImage.data());
 	angle = 0.f;
+
+	spineTest.init(env->graphics);
 }
  
 void Game::update()
 {
 	angle += 0.0002f;
+
+	spineTest.update();
 }
 
 void Game::draw(Graphics* painter) const
@@ -49,11 +53,13 @@ void Game::draw(Graphics* painter) const
 	dstRect.x = 400.f;
 	dstRect.y = 300.f;
 
-	painter->draw(texture0, srcRect, dstRect,
-		128.f, 128.f,
-		0.f,
-		1.f, 1.f,
-		false, false,
-		0.9f,
-		1.0f, 1.0f, 0.8f);
+	//painter->draw(texture0, srcRect, dstRect,
+	//	128.f, 128.f,
+	//	0.f,
+	//	1.f, 1.f,
+	//	false, false,
+	//	0.9f,
+	//	1.0f, 1.0f, 0.8f);
+
+	spineTest.draw();
 }
