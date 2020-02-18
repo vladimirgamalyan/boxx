@@ -7,17 +7,28 @@ class Graphics
 {
 public:
 
-	// A single vertex with UV
-	struct Vertex 
+	//// A single vertex with UV
+	//struct Vertex 
+	//{
+	//	// Position in x/y plane
+	//	float x, y;
+
+	//	// UV coordinates
+	//	float u, v;
+
+	//	// Color, each channel in the range from 0-1
+	//	float r, g, b, a;
+	//};
+
+	struct Color4f
 	{
-		// Position in x/y plane
-		float x, y;
+		Color4f(float r, float g, float b, float a) : r(r), g(g), b(b), a(a) {}
+		Color4f() : r(0), g(0), b(0), a(0) {}
 
-		// UV coordinates
-		float u, v;
-
-		// Color, each channel in the range from 0-1
-		float r, g, b, a;
+		float r;
+		float g;
+		float b;
+		float a;
 	};
 
 	enum class BlendMode 
@@ -39,5 +50,5 @@ public:
 		float red = 1.0f, float green = 1.0f, float blue = 1.0f) = 0;
 	virtual void drawTriangles(float* vertices, size_t count, void* texture, BlendMode blendmode,
 		float x, float y, float angle, float scaleX, float scaleY, float pivotX, float pivotY,
-		float r, float g, float b, float alpha) = 0;
+		Color4f tintLight, Color4f tintDark) = 0;
 };

@@ -19,6 +19,7 @@
 #include "graphics/Graphics.h"
 #include "shaders/BasicShader.h"
 #include "shaders/BasicShaderOneColor.h"
+#include "shaders/TwoColorsShader.h"
 #include "Game.h"
 
 #ifdef CORRADE_TARGET_WINDOWS
@@ -42,7 +43,7 @@ public:
 		float red = 1.0f, float green = 1.0f, float blue = 1.0f) override;
 	void drawTriangles(float* vertices, size_t count, void* texture, BlendMode blendmode,
 		float x, float y, float angle, float scaleX, float scaleY, float pivotX, float pivotY,
-		float r, float g, float b, float alpha) override;
+		Color4f tintLight, Color4f tintDark) override;
 
 private:
 	void drawEvent() override;
@@ -57,6 +58,7 @@ private:
 	Magnum::GL::Mesh _meshBasicOneColorTriangles{ Magnum::NoCreate };
 	BasicShader _shader;
 	BasicShaderOneColor _shaderOneColor;
+	TwoColorsShader _twoColorsShader;
 	GameEnvironment gameEnvironment;
 	Game game;
 

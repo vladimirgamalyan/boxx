@@ -117,7 +117,15 @@ void SpineTest::drawSkeleton(spine::Skeleton* skeleton, float x, float y) const
         // and int if your engine uses integer ranges for color channels.
         spine::Color skeletonColor = skeleton->getColor();
         spine::Color slotColor = slot->getColor();
-        spine::Color tint(skeletonColor.r * slotColor.r, skeletonColor.g * slotColor.g, skeletonColor.b * slotColor.b, skeletonColor.a * slotColor.a);
+        spine::Color tintLight(skeletonColor.r * slotColor.r, skeletonColor.g * slotColor.g, skeletonColor.b * slotColor.b, skeletonColor.a * slotColor.a);
+
+        spine::Color tintDark;
+        if (slot->hasDarkColor())
+            tintDark = slot->getDarkColor();
+        tintDark.a = 1.f;
+
+        Graphics::Color4f colorLight(tintLight.r, tintLight.g, tintLight.b, tintLight.a);
+        Graphics::Color4f colorDark(tintDark.r, tintDark.g, tintDark.b, tintDark.a);
 
         // Fill the vertices array, indices, and texture depending on the type of attachment
         void* texture = NULL;
@@ -183,7 +191,7 @@ void SpineTest::drawSkeleton(spine::Skeleton* skeleton, float x, float y) const
             //indices = quadIndices;
 
             _graphics->drawTriangles(v, 2, texture, engineBlendMode,
-                x, y, 0.f, 1.f, -1.f, 0.f, 0.f, tint.r, tint.g, tint.b, 1.f);
+                x, y, 0.f, 1.f, -1.f, 0.f, 0.f, colorLight, colorDark);
         }
         else if (attachment->getRTTI().isExactly(spine::MeshAttachment::rtti)) {
             // Cast to an MeshAttachment so we can get the rendererObject
@@ -257,7 +265,7 @@ void SpineTest::drawSkeleton(spine::Skeleton* skeleton, float x, float y) const
 
 
             _graphics->drawTriangles(readyVertices.data(), triangleCount, texture, engineBlendMode,
-                x, y, 0.f, 1.f, -1.f, 0.f, 0.f, tint.r, tint.g, tint.b, 1.f);
+                x, y, 0.f, 1.f, -1.f, 0.f, 0.f, colorLight, colorDark);
         }
 
         // Draw the mesh we created for the attachment

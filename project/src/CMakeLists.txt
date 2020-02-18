@@ -28,6 +28,7 @@ set(SOURCES
         app.cpp
         shaders/BasicShader.cpp
         shaders/BasicShaderOneColor.cpp
+        shaders/TwoColorsShader.cpp
         Game.cpp
         external/lodepng.cpp
         spineIntegration.cpp
@@ -42,6 +43,7 @@ set(INCLUDES
         graphics/RectF.h
         shaders/BasicShader.h
         shaders/BasicShaderOneColor.h
+        shaders/TwoColorsShader.h
         GameEnvironment.h
         Game.h
         external/lodepng.h

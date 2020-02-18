@@ -168,8 +168,12 @@ void App::draw(void* texture, const RectF& srcRect, RectF& dstRect,
 		dstRect.w, dstRect.h,		srcRight, srcTop
 	};
 
+	Color4f tintLight(red, green, blue, alpha);
+	Color4f tintDark;
+	tintDark.a = 1.f;
+
 	drawTriangles(t, 2, texture, Graphics::BlendMode::BLEND_NORMAL,
-		dstRect.x, dstRect.y, angle, scaleX, scaleY, pivotX, pivotY, red, green, blue, alpha);
+		dstRect.x, dstRect.y, angle, scaleX, scaleY, pivotX, pivotY, tintLight, tintDark);
 	return;
 
 	vertexDataOneColor = {
@@ -220,7 +224,7 @@ void App::draw(void* texture, const RectF& srcRect, RectF& dstRect,
 
 void App::drawTriangles(float* vertices, size_t count, void* texture, BlendMode blendmode,
 	float x, float y, float angle, float scaleX, float scaleY, float pivotX, float pivotY,
-	float r, float g, float b, float alpha)
+	Color4f tintLight, Color4f tintDark)
 {
 	/*
 		4 2
@@ -234,7 +238,8 @@ void App::drawTriangles(float* vertices, size_t count, void* texture, BlendMode 
 
 	//std::cout << "drawTriangles " << count << std::endl;
 
-	Magnum::Color4 color(r, g, b, 1.f);
+	Magnum::Color4 colorLight(tintLight.r, tintLight.g, tintLight.b, tintLight.a);
+	Magnum::Color4 colorDark(tintDark.r, tintDark.g, tintDark.b, tintDark.a);
 
 	//vertexDataOneColor = {
 	//	{dstRect.w, 0},				{srcRight, srcBottom},
@@ -251,11 +256,12 @@ void App::drawTriangles(float* vertices, size_t count, void* texture, BlendMode 
 		* Magnum::Matrix3::scaling({ scaleX, scaleY })
 		* Magnum::Matrix3::translation({ -pivotX, -pivotY });
 
-	_shaderOneColor.bindTexture(*((Magnum::GL::Texture2D*)texture)); //TODO: rebind only when changed
-	_shaderOneColor.setTransformationProjectionMatrix(projectionMatrix * transformationMatrix)
-		.setColor(color);
+	_twoColorsShader.bindTexture(*((Magnum::GL::Texture2D*)texture)); //TODO: rebind only when changed
+	_twoColorsShader.setTransformationProjectionMatrix(projectionMatrix * transformationMatrix)
+		.setLight(colorLight)
+		.setDark(colorDark);
 	_meshBasicOneColorTriangles.setCount(count * 3);
-	_meshBasicOneColorTriangles.draw(_shaderOneColor);
+	_meshBasicOneColorTriangles.draw(_twoColorsShader);
 }
 
 void App::drawEvent() 
