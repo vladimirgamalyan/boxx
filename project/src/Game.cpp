@@ -28,7 +28,7 @@ void Game::update()
 	spineTest.update();
 }
 
-void Game::draw(Graphics* painter) const
+void Game::draw(Graphics* /*painter*/) const
 {
 	RectF srcRect;
 	RectF dstRect;

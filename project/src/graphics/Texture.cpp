@@ -12,6 +12,5 @@
 
 Size Texture::getSize() const
 {
-
 	return Size();
 }

@@ -1,6 +1,6 @@
 find_package(Corrade REQUIRED Main)
 find_package(Magnum REQUIRED GL Shaders)
-find_package(curl REQUIRED)
+find_package(CURL REQUIRED)
 if(CORRADE_TARGET_ANDROID)
     find_package(Magnum REQUIRED AndroidApplication)
 elseif(CORRADE_TARGET_EMSCRIPTEN)

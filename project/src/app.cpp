@@ -222,7 +222,7 @@ void App::draw(void* texture, const RectF& srcRect, RectF& dstRect,
 	_meshBasicOneColorTriangles.draw(_shaderOneColor);
 }
 
-void App::drawTriangles(float* vertices, size_t count, void* texture, BlendMode blendmode,
+void App::drawTriangles(float* vertices, size_t count, void* texture, BlendMode /*blendmode*/,
 	float x, float y, float angle, float scaleX, float scaleY, float pivotX, float pivotY,
 	Color4f tintLight, Color4f tintDark)
 {

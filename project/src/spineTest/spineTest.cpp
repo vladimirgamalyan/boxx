@@ -67,8 +67,6 @@ void SpineTest::draw() const
         //firstLoop = false;
         drawSkeleton(_skeleton, 320, 440);
     }
-
-    
 }
 
 void SpineTest::drawSkeleton(spine::Skeleton* skeleton, float x, float y) const
@@ -129,7 +127,7 @@ void SpineTest::drawSkeleton(spine::Skeleton* skeleton, float x, float y) const
 
         // Fill the vertices array, indices, and texture depending on the type of attachment
         void* texture = NULL;
-        unsigned short* indices = NULL;
+        //unsigned short* indices = NULL;
         if (attachment->getRTTI().isExactly(spine::RegionAttachment::rtti)) {
             // Cast to an spRegionAttachment so we can get the rendererObject
             // and compute the world vertices
@@ -241,9 +239,9 @@ void SpineTest::drawSkeleton(spine::Skeleton* skeleton, float x, float y) const
             mesh->computeWorldVertices(*slot, 0, numVertices, v.data(), 0, 2);
 
             int t = 0;
-            for (size_t i = 0; i < mesh->getTriangles().size(); ++i)
+            for (size_t k = 0; k < mesh->getTriangles().size(); ++k)
             {
-                int index = mesh->getTriangles()[i] * 2;
+                int index = mesh->getTriangles()[k] * 2;
                 readyVertices[t * 4 + 0] = v[index];
                 readyVertices[t * 4 + 1] = v[index + 1];
                 readyVertices[t * 4 + 2] = mesh->getUVs()[index];
