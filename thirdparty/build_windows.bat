@@ -15,7 +15,7 @@ rmdir /S /Q %install_prefix%
 :: ====================== SDL2 ======================
 
 cd /D %~dp0
-cd SDL2-2.0.10
+cd SDL2-2.0.12
 rmdir /S /Q build
 mkdir build
 cd build
@@ -27,7 +27,7 @@ cd build
 :: ==================== CORRADE =====================
 
 cd /D %~dp0
-cd corrade-2019.10
+cd corrade-2020.06
 rmdir /S /Q build
 mkdir build
 cd build
@@ -38,7 +38,7 @@ cd build
 :: ==================== MAGNUM ======================
 
 cd /D %~dp0
-cd magnum-2019.10
+cd magnum-2020.06
 rmdir /S /Q build
 mkdir build
 cd build

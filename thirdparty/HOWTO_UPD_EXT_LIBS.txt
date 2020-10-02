@@ -1,0 +1,11 @@
+CURL
+https://curl.haxx.se/download.html
+
+SDL
+https://libsdl.org/download-2.0.php
+Root CMakeLists.txt - update minimal required CMake version to cmake_minimum_required(VERSION 3.15) (to enable -DCMAKE_MSVC_RUNTIME_LIBRARY flag)
+
+Corrade, Magnum
+https://github.com/mosra/corrade/releases
+https://github.com/mosra/corrade/releases
+Root CMakeLists.txt - update minimal required CMake version to cmake_minimum_required(VERSION 3.15) (to enable -DCMAKE_MSVC_RUNTIME_LIBRARY flag)

@@ -38,3 +38,5 @@
 /project/web/boxx.wasm
 /drafts/SpriterPlusPlus-master/.vs
 /drafts/SpriterPlusPlus-master/SFML-2.3.2/examples
+/thirdparty/SDL2-2.0.12/build
+/thirdparty/curl-7.72.0/builds
